@@ -1,23 +1,53 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useState } from 'react';
+import { data } from './data';
 
 function App() {
+
+  const previouSlide = () =>{
+    setCat(cat =>{
+      cat --;
+      if (cat<0){
+        return data.length-1
+      }
+      return cat
+    })
+  }
+
+
+  const nextSlide = () => {
+    setCat(cat =>{
+      cat ++
+      if (cat > data.length-1){
+        cat=0}
+      return cat;
+    }
+    )
+  }
+
+  const [cat, setCat] = useState(0)
+  const {id, type, origin, temperament, lifespan, image, description} = data[cat]
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='header'>
+      
+    <div key={id} className='container'>
+      <div >
+        <img src={image} alt='cat' width="350px"></img>
+      </div>
+      <div className='desc'>
+        <h1>{type}</h1>
+        <h2> From : {origin}</h2>
+        <h3>Temperament - {temperament}</h3>
+        <h3>Lifespan: {lifespan}</h3>
+        <h3>Description: {description}</h3>
+      </div>      
+    </div>
+    <div >
+      <button onClick={previouSlide}>Previous</button>
+      <button onClick={() => nextSlide()}>Next</button>
+    </div>
     </div>
   );
 }
