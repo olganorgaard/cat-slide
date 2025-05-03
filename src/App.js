@@ -4,7 +4,9 @@ import { useState } from 'react';
 import { data } from './data';
 
 function App() {
-
+  const [cat, setCat] = useState(0)
+  const {id, type, origin, temperament, lifespan, image, description} = data[cat] 
+  
   const previouSlide = () =>{
     setCat(cat =>{
       cat --;
@@ -25,9 +27,6 @@ function App() {
     }
     )
   }
-
-  const [cat, setCat] = useState(0)
-  const {id, type, origin, temperament, lifespan, image, description} = data[cat]
 
   return (
     <div className='header'>
